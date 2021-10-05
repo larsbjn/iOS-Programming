@@ -1,0 +1,40 @@
+import UIKit
+
+struct Dictionary {
+    private var keys: [Int]
+    private var values: [String]
+    
+    init() {
+        self.keys = []
+        self.values = []
+    }
+    
+    mutating func put(key: Int, value: String) {
+        if let index = keys.firstIndex(of: key) {
+            values.remove(at: index)
+            values.insert(value, at: index)
+        } else {
+            keys.append(key)
+            values.append(value)
+        }
+        
+    }
+    
+    func value(key: Int) -> String? {
+        if let index = keys.firstIndex(of: key) {
+            return values[index]
+        }
+        return nil
+    }
+}
+
+// Program
+var dictionary = Dictionary()
+
+dictionary.put(key: 200, value: "OK")
+dictionary.put(key: 400, value: "Baaad Request")
+dictionary.put(key: 400, value: "Bad Request")
+dictionary.put(key: 501, value: "Not Implemented")
+
+dictionary.value(key: 200)
+dictionary.value(key: 500)
